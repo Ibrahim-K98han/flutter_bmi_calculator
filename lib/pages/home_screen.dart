@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bmi_calculator/height_widget.dart';
+import 'package:flutter_bmi_calculator/pages/score_screen.dart';
 import 'package:flutter_bmi_calculator/widgets/age_weight_widget.dart';
 import 'package:flutter_bmi_calculator/widgets/gender_widget.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -67,7 +69,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
                   child: SwipeableButtonView(
                       isFinished: _isFinished,
-                      onFinish: (){
+                      onFinish: () async{
+                        await Navigator.push(
+                            context,
+                            PageTransition(
+                              child: ScoreScreen(
+                              bmiScore:_bmiScore,
+                              age:_age
+                            ),
+                                type:PageTransitionType.fade));
                         setState((){
                           _isFinished = false;
                         });
