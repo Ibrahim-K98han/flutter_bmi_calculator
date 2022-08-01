@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _gender = 0;
+  int _height = 150;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   _gender = genderVal;
                 },
                 ),
-                HeightWidget()
+                HeightWidget(onChange: (heightVal){
+                    _height = heightVal;
+                },)
               ],
             ),
           ),

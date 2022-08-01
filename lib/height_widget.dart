@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HeightWidget extends StatefulWidget {
-  const HeightWidget({Key? key}) : super(key: key);
+  final Function(int) onChange;
+  const HeightWidget({Key? key, required this.onChange}) : super(key: key);
 
   @override
   State<HeightWidget> createState() => _HeightWidgetState();
@@ -13,22 +14,36 @@ class _HeightWidgetState extends State<HeightWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 12,
-        shape: RoundedRectangleBorder(),
-    child: Column(
-      children: [
-        Text('Height', style:TextStyle(fontSize: 25, color: Colors.grey) ,),
-        SizedBox(height: 10,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(_height.toString(),style: TextStyle(fontSize: 40),),
-            Text('cm',style: TextStyle(fontSize: 20, color: Colors.grey),),
-          ],
-        ),
-
-      ],
-    ));
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+          elevation: 12,
+          shape: RoundedRectangleBorder(),
+      child: Column(
+        children: [
+          Text('Height', style:TextStyle(fontSize: 25, color: Colors.grey) ,),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(_height.toString(),style: TextStyle(fontSize: 40),),
+              Text('cm',style: TextStyle(fontSize: 20, color: Colors.grey),),
+            ],
+          ),
+          Slider(
+            min: 0,
+            max: 240,
+            value: _height.toDouble(),
+            thumbColor: Colors.red,
+            onChanged: (value){
+              setState((){
+                  _height = value.toInt();
+              });
+              widget.onChange(_height);
+            },
+          )
+        ],
+      )),
+    );
   }
 }
