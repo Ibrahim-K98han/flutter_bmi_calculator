@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AgeWeightWidget extends StatefulWidget {
-  const AgeWeightWidget({Key? key}) : super(key: key);
+  final Function(int) onChange;
+  final String title;
+  final int initValue;
+  final int min;
+  final int max;
+  const AgeWeightWidget({Key? key,
+    required this.onChange,
+    required this.title,
+    required this.initValue,
+    required this.min,
+    required this.max}) : super(key: key);
 
   @override
   State<AgeWeightWidget> createState() => _AgeWeightWidgetState();
