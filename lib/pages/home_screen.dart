@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bmi_calculator/height_widget.dart';
@@ -19,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _age = 30;
   int _weight = 50;
   bool _isFinished = false;
+  double _bmiScore = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                       onWaitingProcess: (){
+                        calculateBmi();
                         Future.delayed(Duration(seconds: 1),(){
                           setState((){
                             _isFinished = true;
@@ -89,5 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  void calculateBmi(){
+    _bmiScore = _weight/pow(_height/100,2);
   }
 }
